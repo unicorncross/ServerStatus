@@ -28,7 +28,7 @@ jq_file="${file}/jq"
 [[ ! -e ${jq_file} ]] && jq_file="/usr/bin/jq"
 region_json="${file}/region.json"
 
-github_prefix="https://raw.githubusercontent.com/CokeMine/ServerStatus-Hotaru/master"
+github_prefix="https://raw.githubusercontent.com/unicorncross/ServerStatus/master"
 coding_prefix="https://cokemine.coding.net/p/hotarunet/d/ServerStatus-Hotaru/git/raw/master"
 link_prefix=${github_prefix}
 
@@ -84,29 +84,29 @@ check_region() {
 }
 Download_Server_Status_server() {
   cd "/tmp" || exit 1
-  [[ ${mirror_num} == 2 ]] && bundle_link="https://cokemine.coding.net/p/hotarunet/d/ServerStatus-Hotaru/git/archive/master/?download=true" || bundle_link="https://github.com/CokeMine/ServerStatus-Hotaru/archive/master.zip"
+  [[ ${mirror_num} == 2 ]] && bundle_link="https://cokemine.coding.net/p/hotarunet/d/ServerStatus-Hotaru/git/archive/master/?download=true" || bundle_link="https://github.com/unicorncross/ServerStatus/archive/master.zip"
   [[ ${mirror_num} == 2 ]] && github_link="https://hub.fastgit.org" || github_link="https://github.com"
   wget -N --no-check-certificate "${bundle_link}" -O "master.zip"
   [[ ! -e "master.zip" ]] && echo -e "${Error} ServerStatus 服务端下载失败 !" && exit 1
   unzip master.zip
   rm -rf master.zip
-  [[ -d "/tmp/cokemine-hotarunet-ServerStatus-Hotaru-master" ]] && mv "/tmp/cokemine-hotarunet-ServerStatus-Hotaru-master" "/tmp/ServerStatus-Hotaru-master"
-  [[ ! -d "/tmp/ServerStatus-Hotaru-master" ]] && echo -e "${Error} ServerStatus 服务端解压失败 !" && exit 1
-  cd "/tmp/ServerStatus-Hotaru-master/server" || exit 1
+  [[ -d "/tmp/cokemine-hotarunet-ServerStatus-Hotaru-master" ]] && mv "/tmp/cokemine-hotarunet-ServerStatus-Hotaru-master" "/tmp/ServerStatus-master"
+  [[ ! -d "/tmp/ServerStatus-master" ]] && echo -e "${Error} ServerStatus 服务端解压失败 !" && exit 1
+  cd "/tmp/ServerStatus-master/server" || exit 1
   make
-  [[ ! -e "sergate" ]] && echo -e "${Error} ServerStatus 服务端编译失败 !" && cd "${file_1}" && rm -rf "/tmp/ServerStatus-Hotaru-master" && exit 1
+  [[ ! -e "sergate" ]] && echo -e "${Error} ServerStatus 服务端编译失败 !" && cd "${file_1}" && rm -rf "/tmp/ServerStatus-master" && exit 1
   cd "${file_1}" || exit 1
   mkdir -p "${server_file}"
   if [[ -e "${server_file}/sergate" ]]; then
     mv "${server_file}/sergate" "${server_file}/sergate1"
-    mv "/tmp/ServerStatus-Hotaru-master/server/sergate" "${server_file}/sergate"
+    mv "/tmp/ServerStatus-master/server/sergate" "${server_file}/sergate"
   else
-    mv "/tmp/ServerStatus-Hotaru-master/server/sergate" "${server_file}/sergate"
+    mv "/tmp/ServerStatus-master/server/sergate" "${server_file}/sergate"
     wget -N --no-check-certificate "${github_link}/cokemine/hotaru_theme/releases/latest/download/hotaru-theme.zip"
     unzip hotaru-theme.zip && mv "./hotaru-theme" "${web_file}"
     rm -rf hotaru-theme.zip
   fi
-  rm -rf "/tmp/ServerStatus-Hotaru-master"
+  rm -rf "/tmp/ServerStatus-master"
   if [[ ! -e "${server_file}/sergate" ]]; then
     echo -e "${Error} ServerStatus 服务端移动重命名失败 !"
     [[ -e "${server_file}/sergate1" ]] && mv "${server_file}/sergate1" "${server_file}/sergate"
@@ -304,8 +304,8 @@ Set_password() {
   else
     echo -e "请输入 ServerStatus 服务端中对应配置的密码[password]（字母/数字）"
   fi
-  read -erp "(默认: doub.io):" password_s
-  [[ -z "$password_s" ]] && password_s="doub.io"
+  read -erp "(默认: PPFEEL.COM):" password_s
+  [[ -z "$password_s" ]] && password_s="PPFEEL.COM"
   echo && echo "	================================================"
   echo -e "	密码[password]: ${Red_background_prefix} ${password_s} ${Font_color_suffix}"
   echo "	================================================" && echo
