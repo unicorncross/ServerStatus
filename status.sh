@@ -311,9 +311,9 @@ Set_password() {
   echo "	================================================" && echo
 }
 Set_vnstat() {
-  echo -e "对于流量计算是否使用Vnstat每月自动清零？ [y/N]"
-  read -erp "(默认: N):" isVnstat
-  [[ -z "$isVnstat" ]] && isVnstat="n"
+  echo -e "对于流量计算是否使用Vnstat每月自动清零？ [Y/n]"
+  read -erp "(默认: Y):" isVnstat
+  [[ -z "$isVnstat" ]] && isVnstat="y"
 }
 Set_name() {
   echo -e "请输入 ServerStatus 服务端要设置的节点名称[name]（支持中文，前提是你的系统和SSH工具支持中文输入，仅仅是个名字）"
