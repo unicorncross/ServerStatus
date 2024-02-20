@@ -1,7 +1,4 @@
-# ServerStatus-Hotaru
-云探针、多服务器探针、云监控、多服务器云监控
 
-基于 ServerStatus-Toyo 最新版本稍作修改。
 
 ## 特性
 
@@ -41,16 +38,12 @@ ServerStatus-Hotaru 将会停留在轻量级的 ServerStatus，不会再添加�
 
 7、等等
 
-欢迎使用 NodeStatus: https://github.com/cokemine/nodestatus
-
-本项目仍会继续维护
-
 ## 安装方法
 
 服务端：
 
 ```bash
-wget https://raw.githubusercontent.com/cokemine/ServerStatus-Hotaru/master/status.sh
+wget https://raw.githubusercontent.com/unicorncross/ServerStatus/master/status.sh
 # wget https://cokemine.coding.net/p/hotarunet/d/ServerStatus-Hotaru/git/raw/master/status.sh 若服务器位于中国大陆建议选择 Coding.net 仓库
 bash status.sh s
 ```
